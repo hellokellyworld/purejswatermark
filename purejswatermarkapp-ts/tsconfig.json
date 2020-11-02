@@ -1,0 +1,20 @@
+{
+	"compilerOptions": {
+		"lib": ["es6", "dom", "es2017"],
+		"target": "es6",
+		"jsx": "react",
+		"module": "commonjs",
+		"experimentalDecorators": true,
+		"sourceMap": true,
+		//"strict": true
+		// "forceConsistentCasingInFileNames": true,
+		// "noUnusedLocals": true,
+		// "noUnusedParameters": true,
+		// "noImplicitReturns": true,
+		// "noFallthroughCasesInSwitch": true,
+		// "allowUnreachableCode": false
+	},
+	"include": ["./src/**/*"],
+	"exclude": ["node_modules","dist"]
+
+}

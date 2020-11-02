@@ -1,0 +1,98 @@
+:root {
+  --topBannerHeight: 6vh;
+  --searchBannerHeight: 5vh;
+  --statusBarHeight: 5vh;
+  --afterTopStatus: 11vh; //topBannerHeight+statusBarHeight
+  --sortBarHeight: 3vh;
+  --afterTopBanner: 6vh; //=topBannerHeight
+  --afterSearch: 11vh; //=topBannerHeight+searchBannerHeight to position it
+  --afterSearchSort: 14vh; //= topBannerHeight+searchBannerHeight+sortBarHeight
+  --afterTopSearchSort: 14vh;
+  --footerHeight: 6vh;
+  --inputFontSize: 1.2rem;
+  --inputBoxSize: 5rem;
+}
+
+html {
+  //make 10px=1rem and 12px=1.2rem, etc
+  font-size: 62.5%;
+  // -webkit-appearance: none !important;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+@font-face {
+  font-family: "FontAwesome";
+  font-weight: normal;
+  font-style: normal;
+
+  //CDN access of fonts
+  //src: url("http://maxcdn.bootstrapcdn.com/font-awesome/4.3.0/fonts/fontawesome-webfont.eot?v=4.3.0");
+  //src: url("http://maxcdn.bootstrapcdn.com/font-awesome/4.3.0/fonts/fontawesome-webfont.eot?#iefix&v=4.3.0")
+  //        format("embedded-opentype"),
+  //      url("http://maxcdn.bootstrapcdn.com/font-awesome/4.3.0/fonts/fontawesome-webfont.woff2?v=4.3.0")
+  //        format("woff2"),
+  //      url("http://maxcdn.bootstrapcdn.com/font-awesome/4.3.0/fonts/fontawesome-webfont.woff?v=4.3.0")
+  //        format("woff"),
+  //      url("http://maxcdn.bootstrapcdn.com/font-awesome/4.3.0/fonts/fontawesome-webfont.ttf?v=4.3.0")
+  //        format("truetype"),
+  //      url("http://maxcdn.bootstrapcdn.com/font-awesome/4.3.0/fonts/fontawesome-webfont.svg?v=4.3.0#fontawesomeregular")
+  //        format("svg");
+}
+
+body {
+  font-family: -apple-system, "BlinkMacSystemFont", "SF UI Display",
+    "PingFang SC", "苹方", "Robot", "思源黑体", "STXihei", "华文细黑",
+    "FiraSans", "Droid Sans", "Myriad  Pro", "Helvetica Neue", "sans-serif",
+    "FontAweSome";
+  text-rendering: optimizeLegibility;
+  font-size: 1.2rem;
+  color: black;
+  background-color: #f5f5f5;
+  touch-action: manipulation;
+}
+
+.requiredField {
+  color: red;
+}
+
+// The following are shared by CreatPost and PostsList
+.documentPage {
+  .panel {
+    padding-top: 1rem;
+    padding-left: 0.5rem;
+    padding-right: 0.5rem;
+
+    .body {
+      padding: 0.5rem;
+    }
+  }
+
+  .buttonLabel {
+    width: 100%;
+  }
+}
+
+h1 h2 h3 h4 h5 h6 p {
+  .fontlight {
+    font-weight: light;
+    /* 200 */
+  }
+
+  .fontnormal {
+    font-weight: normal;
+    /* 400 */
+  }
+
+  .fontthick {
+    font-weight: bold;
+    /* 700 */
+  }
+
+  .fontthicker {
+    font-weight: 900;
+    /* bolder*/
+  }
+}
