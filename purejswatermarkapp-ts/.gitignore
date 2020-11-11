@@ -5,6 +5,5 @@ node_modules/
 .DS_Store
 
 #
-front-end/src/utils/CountryIndex.d.ts
-front-end/docs/bundle.js
-front-end/dist/*
+**/dist/* 
+**/es/* 
