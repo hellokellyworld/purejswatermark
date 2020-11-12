@@ -1,0 +1,223 @@
+.create-post-addr-photos-page {
+  width: 100%;
+  background-color: #f5f5f5;
+  .newpost-top-banner-div {
+    //background-color: orange;
+    height: var(--topBannerHeight);
+  }
+  .newpost-addr-photos-div {
+    //background-color: red;
+    //position: fixed;
+    position: relative;
+    margin-top: calc(var(--afterTopBanner) * 1.1) !important;
+    width: 100%;
+    padding-left: 1vh;
+    padding-right: 1vh;
+    z-index: 1000;
+    overflow: auto !important; //gets the scroll conent is long
+    //margin-bottom: 0rem;
+    //all form-group items follow these
+    .form-group {
+      width: 100%;
+      margin-bottom: 0 !important;
+      .control-label {
+        color: black;
+        height: 0;
+        margin-bottom: 0;
+      }
+      //Form group is outermost
+      .input-group {
+        //then input group
+        //class is autlmatically this one for InputFieldGroup
+        width: 100%;
+        margin-bottom: 0rem;
+        .form-control {
+          //finally  form control
+          font-size: 1.2rem;
+          text-align: left;
+          //Tom Long make sure height same as given in --searchBannerHeight
+          height: var(--searchBannerHeight) !important;
+        }
+        ::placeholder {
+          color: #505050;
+        }
+      }
+      .inputInvalid {
+        color: red;
+      }
+    }
+
+    .newpost-addr-map-div {
+      //background-color: yellow;
+      width: 100%;
+      height: 50vh;
+
+      .newpost-addr-div {
+        //background-color: pink;
+        width: 100%;
+      }
+      .newpost-map-div {
+        border: 0.1rem solid rgba(0, 0, 0, 0.3);
+        height: 45vh;
+        z-index: 1001;
+
+        //background-color: red;
+      }
+    }
+
+    .newpost-photos-div {
+      width: 100%;
+      //background-color: green;
+      .photo-label-delete-div {
+        width: 50%;
+        //background-color: blue;
+        .photo-label {
+          //width: 20%;
+          color: black;
+          font-size: 1.2rem;
+          //background-color: gray;
+          display: inline-block;
+        }
+        .photo-delete-all-div {
+          //width: 20%;
+          //background-color: indigo;
+          display: inline-block;
+          text-align: right;
+          margin: 0;
+          .photo-delete-button {
+            color: white;
+            background-color: rgba(0, 0, 0, 0.9);
+            //background-color: red;
+            border-radius: 1rem;
+            width: 100%;
+            text-align: center;
+            padding-left: 0.5rem;
+            padding-right: 0.5rem;
+            padding-top: 0.3rem;
+            padding-bottom: 0.3rem;
+            display: inline-block;
+            vertical-align: middle;
+            cursor: pointer;
+            &:hover {
+              background-color: #009966;
+              color: #cccccc;
+            }
+            &.active {
+              background-color: #009966;
+              color: white;
+              border-color: #cccccc;
+            }
+          }
+        }
+      }
+      .photo-upload-div {
+        border: 0.1rem solid rgba(0, 0, 0, 0.3);
+        // background-color: red;
+      }
+    }
+
+    .newpost-addr-photo-submit-group-div {
+      width: 100%;
+      margin-top: 2rem;
+      //background-color: orange;
+      justify-content: space-between;
+      .newpost-cancel-div {
+        width: 33%;
+        display: inline-block;
+        text-align: left;
+        padding: 0;
+        margin: 0;
+        //background-color: yellow;
+        .new-post-cancel-button {
+          //background-color: green;
+          background-color: rgba(128, 128, 128, 0.9);
+          border-radius: 0.5rem;
+          text-align: center;
+          width: 50%;
+          color: white;
+          padding-left: 0.5rem;
+          padding-right: 0.5rem;
+          padding-top: 0.3rem;
+          padding-bottom: 0.3rem;
+          display: inline-block;
+          vertical-align: middle;
+          cursor: pointer;
+          &:hover {
+            background-color: #cccccc;
+            color: black;
+          }
+        }
+      }
+      .info-reset-div {
+        width: 33%;
+        //background-color: blue;
+        display: inline-block;
+        text-align: left;
+        margin: 0;
+        .info-reset-button {
+          //background-color: cyan;
+          background-color: rgba(128, 128, 128, 0.9);
+          border-radius: 0.5rem;
+          width: 50%;
+          color: white;
+          text-align: center;
+          padding-left: 0.5rem;
+          padding-right: 0.5rem;
+          padding-top: 0.3rem;
+          padding-bottom: 0.3rem;
+          display: inline-block;
+          vertical-align: middle;
+          cursor: pointer;
+          &:hover {
+            background-color: #cccccc;
+            color: black;
+          }
+          &:active {
+            background-color: #009966;
+            color: white;
+            border-color: #cccccc;
+          }
+          &:focus {
+            background-color: #009966;
+            color: white;
+            border-color: #cccccc;
+          }
+        }
+      }
+      .newpost-submit-div {
+        width: 33%;
+        //background-color: indigo;
+        display: inline-block;
+        text-align: right;
+        margin-top: 1rem;
+        margin-bottom: 1rem;
+
+        //background-color: purple;
+        .newpost-submit-button {
+          color: white;
+          background-color: rgba(0, 0, 0, 0.9);
+          //background-color: red;
+          border-radius: 0.5rem;
+          width: 100%;
+          text-align: center;
+          padding-left: 0.5rem;
+          padding-right: 0.5rem;
+          padding-top: 0.3rem;
+          padding-bottom: 0.3rem;
+          display: inline-block;
+          vertical-align: middle;
+          cursor: pointer;
+          &:hover {
+            background-color: #009966;
+            color: #cccccc;
+          }
+          &.active {
+            background-color: #009966;
+            color: white;
+            border-color: #cccccc;
+          }
+        }
+      }
+    }
+  }
+}

@@ -1,0 +1,33 @@
+.topBanner {
+  height: var(--topBannerHeight);
+  position: fixed;
+  top: 0rem;
+  display: flex;
+  width: 100%;
+  justify-content: space-between;
+  background-color: black;
+  color: white;
+  font-size: 1.5rem;
+  align-items: center;
+  z-index: 9999;
+  .button {
+    font-size: 1.5rem;
+    cursor: pointer;
+  }
+
+  .title {
+    text-align: center;
+  }
+  .rightButtonText {
+    text-align: right;
+  }
+  .left {
+    width: 20%;
+  }
+  .middle {
+    width: 60%;
+  }
+  .right {
+    width: 20%;
+  }
+}
