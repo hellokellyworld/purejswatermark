@@ -1,4 +1,4 @@
-import { throwError, isNodePattern } from '@jimp/utils';
+import { throwError, isNodePattern } from "../../utils/src/index.js"//'@jimp/utils';
 
 import Resize from './modules/resize';
 import Resize2 from './modules/resize2';

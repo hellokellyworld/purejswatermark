@@ -1,6 +1,7 @@
 import Path from 'path';
 import bMFont from 'load-bmfont';
-import { isNodePattern, throwError } from '@jimp/utils';
+import { isNodePattern, throwError } from "../../utils/src/index.js";//'@jimp/utils';
+//import blit from "../../plugin-blit/src/index.js";
 import { measureText, measureTextHeight } from './measure-text';
 
 function xOffsetBasedOnAlignment(constants, font, line, maxWidth, alignment) {
@@ -10,7 +11,7 @@ function xOffsetBasedOnAlignment(constants, font, line, maxWidth, alignment) {
 
   if (alignment === constants.HORIZONTAL_ALIGN_CENTER) {
     return (maxWidth - measureText(font, line)) / 2;
-  }
+  }  
 
   return maxWidth - measureText(font, line);
 }

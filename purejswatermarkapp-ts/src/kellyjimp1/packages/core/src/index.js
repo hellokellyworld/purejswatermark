@@ -2,7 +2,7 @@ import fs from 'fs';
 import Path from 'path';
 import EventEmitter from 'events';
 
-import { isNodePattern, throwError, scan, scanIterator } from '@jimp/utils';
+import { isNodePattern, throwError, scan, scanIterator } from "../../utils/src/index.js"//'@jimp/utils';
 import anyBase from 'any-base';
 import mkdirp from 'mkdirp';
 import pixelMatch from 'pixelmatch';

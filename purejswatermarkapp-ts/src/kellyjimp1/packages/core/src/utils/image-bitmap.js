@@ -1,7 +1,7 @@
 import fileType from 'file-type';
 
 import EXIFParser from 'exif-parser';
-import { throwError } from '@jimp/utils';
+import { throwError } from "../../../utils/src/index.js"//'@jimp/utils';
 
 import * as constants from '../constants';
 import * as MIME from './mime';

@@ -3,7 +3,7 @@ import Jimp, {
   addJimpMethods,
   addConstants,
   jimpEvChange
-} from '@jimp/core' ;//"../../core/src/index.js" //'@jimp/core';
+} from "../../core/src/index.js" //'@jimp/core';
 
 export default function configure(configuration, jimpInstance = Jimp) {
   const jimpConfig = {

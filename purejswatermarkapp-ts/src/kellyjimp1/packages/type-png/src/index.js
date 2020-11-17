@@ -1,5 +1,5 @@
 import { PNG } from 'pngjs';
-import { throwError, isNodePattern } from '@jimp/utils';
+import { throwError, isNodePattern } from "../../utils/src/index.js"//'@jimp/utils';
 
 const MIME_TYPE = 'image/png';
 

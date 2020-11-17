@@ -1,4 +1,4 @@
-import { isNodePattern, throwError } from '@jimp/utils';
+import { isNodePattern, throwError } from "../../../utils/src/index.js"//'@jimp/utils';
 import * as constants from '../constants';
 
 import * as compositeModes from './composite-modes';
