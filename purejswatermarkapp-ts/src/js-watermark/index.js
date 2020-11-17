@@ -1,4 +1,4 @@
-const Jimp = require('../kellyjimp/packages/jimp/dist/index.js');
+const Jimp = require('../kellyjimp1/dist/jimp/src/index.js');
 
 const defaultOptions = {
     ratio: 0.6,

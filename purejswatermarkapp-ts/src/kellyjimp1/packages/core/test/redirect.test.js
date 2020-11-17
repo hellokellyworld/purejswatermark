@@ -1,4 +1,4 @@
-import { Jimp as jimp, getTestDir } from '@jimp/test-utils';
+import { Jimp as jimp, getTestDir } from "../../utils/src/index.js"//'@jimp/test-utils';
 
 const fs = require('fs');
 const http = require('http');
