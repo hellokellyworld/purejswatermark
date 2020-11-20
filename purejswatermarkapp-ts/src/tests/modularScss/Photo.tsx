@@ -1,13 +1,13 @@
-import * as React from 'react';
-import {getSrc, getSrcSet} from './utils';
-import * as styles from './Photo.module.scss';
+import * as React from "react";
+import {getSrc, getSrcSet} from "./utils";
+import * as styles from "./Photo.module.scss";
 
 //Tomlong: for customMedia, must use require instead of import here
-const {customMedia} = require('./global.module.scss');
+const {customMedia} = require("./global.module.scss");
 
-console.log('styles', styles);
-console.log(customMedia['--photo-breakpoint']);
-const photoBreakpoint = customMedia['--photo-breakpoint'];
+console.log("styles", styles);
+console.log(customMedia["--photo-breakpoint"]);
+const photoBreakpoint = customMedia["--photo-breakpoint"];
 export interface PhotoProps {
   publicId: any;
   alt: any;
@@ -30,9 +30,9 @@ const Photo = ({
         <img
           className={rounded ? styles.roundedPhoto : styles.photo}
           style={
-            typeof borderRadius !== 'undefined'
+            typeof borderRadius !== "undefined"
               ? {
-                  ['--border-radius']: borderRadius,
+                  ["--border-radius"]: borderRadius,
                   // borderRadius: borderRadius,
                 } as React.CSSProperties
               : (null as unknown) as React.CSSProperties
@@ -47,20 +47,20 @@ const Photo = ({
           })}
           sizes={`${photoBreakpoint} 400px, 200px`}
           // sizes="(min-width: 30rem) 400px, 200px"
-        />{' '}
+        />{" "}
         <figcaption className={styles.caption}> {alt} </figcaption>
-        <span>
+        {/* <span>
           {'Here is your cusotoms media data:' +
             photoBreakpoint +
             'Here is your styles data:' +
             styles['photo-div']}
-        </span>
+        </span> */}
         <img
           className={rounded ? styles.roundedPhoto : styles.photo}
           style={
-            typeof borderRadius !== 'undefined'
+            typeof borderRadius !== "undefined"
               ? {
-                  ['--border-radius']: borderRadius,
+                  ["--border-radius"]: borderRadius,
                   // borderRadius: borderRadius,
                 } as React.CSSProperties
               : (null as unknown) as React.CSSProperties
@@ -69,7 +69,7 @@ const Photo = ({
           sizes={`${photoBreakpoint} 400px, 200px`}
           // sizes="(min-width: 30rem) 400px, 200px"
         />
-        {' My new Image is here'}
+        {" My new Image is here"}
       </figure>
     </div>
   );
