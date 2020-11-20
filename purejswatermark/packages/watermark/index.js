@@ -1,4 +1,4 @@
-const Jimp = require('../kellyjimp1/dist/jimp/src/index.js');
+const Jimp = require('../jimp/src/index.js');
 
 const defaultOptions = {
     ratio: 0.6,
@@ -63,18 +63,19 @@ module.exports.addTextWatermark = async (mainImage, options) => {
             const font = await Jimp.loadFont(SizeEnum[options.textSize]);
             const X = 0,        //Always center aligned
                 Y = 0
-            const finalImage = await main.print(font, X, Y, {
+             const finalImage= await main.print(font, X, Y, {
                 text: options.text,
                 alignmentX: Jimp.HORIZONTAL_ALIGN_CENTER,
                 alignmentY: Jimp.VERTICAL_ALIGN_MIDDLE
             }, maxWidth, maxHeight);
             finalImage.quality(100)
-            const mime =  await finalImage.getMIME();          
-            return await finalImage.getBase64Async(mime).then(bufferData => {
-                 //result = bufferData;
-                 //console.log("this is result",result)
+            const mime =  await finalImage.getMIME();
+            return await finalImage.getBase64Async(mime,(err,data)=>{
+
+                if(err){console.log("error get nase64async",err)}
+
+            }).then(bufferData => {
                  return bufferData;
-               //newResult.src = bufferData;
              }).catch(err=>{
                  throw err;
              })

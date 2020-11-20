@@ -5,10 +5,10 @@ import EventEmitter from 'events';
 import { isNodePattern, throwError, scan, scanIterator } from "../../utils/src/index.js"//'@jimp/utils';
 import anyBase from 'any-base';
 import mkdirp from 'mkdirp';
-import pixelMatch from 'pixelmatch';
-import tinyColor from 'tinycolor2';
+//import pixelMatch from 'pixelmatch';
+//import tinyColor from 'tinycolor2';
 
-import ImagePHash from './modules/phash';
+//import ImagePHash from './modules/phash';
 import request from './request';
 
 import composite from './composite';
@@ -566,7 +566,7 @@ class Jimp extends EventEmitter {
    * @param {function(Error, Jimp)} cb a Node-style function to call with the buffer as the second argument
    * @returns {Jimp} this for chaining of methods
    */
-  getBase64(mime, cb) {
+  async getBase64(mime, cb) {
     if (mime === Jimp.AUTO) {
       // allow auto MIME detection
       mime = this.getMIME();
@@ -580,11 +580,10 @@ class Jimp extends EventEmitter {
       return throwError.call(this, 'cb must be a function', cb);
     }
 
-    this.getBuffer(mime, function(err, data) {
+    await this.getBuffer(mime, function(err, data) {
       if (err) {
         return throwError.call(this, err, cb);
       }
-
       const src = 'data:' + mime + ';base64,' + data.toString('base64');
       cb.call(this, null, src);
     });
@@ -594,66 +593,66 @@ class Jimp extends EventEmitter {
 
   getBase64Async = mime => promisify(this.getBase64, this, mime);
 
-  /**
-   * Generates a perceptual hash of the image <https://en.wikipedia.org/wiki/Perceptual_hashing>. And pads the string. Can configure base.
-   * @param {number} base (optional) a number between 2 and 64 representing the base for the hash (e.g. 2 is binary, 10 is decimal, 16 is hex, 64 is base 64). Defaults to 64.
-   * @param {function(Error, Jimp)} cb (optional) a callback for when complete
-   * @returns {string} a string representing the hash
-   */
-  hash(base, cb) {
-    base = base || 64;
+  // /**
+  //  * Generates a perceptual hash of the image <https://en.wikipedia.org/wiki/Perceptual_hashing>. And pads the string. Can configure base.
+  //  * @param {number} base (optional) a number between 2 and 64 representing the base for the hash (e.g. 2 is binary, 10 is decimal, 16 is hex, 64 is base 64). Defaults to 64.
+  //  * @param {function(Error, Jimp)} cb (optional) a callback for when complete
+  //  * @returns {string} a string representing the hash
+  //  */
+  // hash(base, cb) {
+  //   base = base || 64;
 
-    if (typeof base === 'function') {
-      cb = base;
-      base = 64;
-    }
+  //   if (typeof base === 'function') {
+  //     cb = base;
+  //     base = 64;
+  //   }
 
-    if (typeof base !== 'number') {
-      return throwError.call(this, 'base must be a number', cb);
-    }
+  //   if (typeof base !== 'number') {
+  //     return throwError.call(this, 'base must be a number', cb);
+  //   }
 
-    if (base < 2 || base > 64) {
-      return throwError.call(
-        this,
-        'base must be a number between 2 and 64',
-        cb
-      );
-    }
+  //   if (base < 2 || base > 64) {
+  //     return throwError.call(
+  //       this,
+  //       'base must be a number between 2 and 64',
+  //       cb
+  //     );
+  //   }
 
-    let hash = this.pHash();
-    hash = anyBase(anyBase.BIN, alphabet.slice(0, base))(hash);
+  //   let hash = this.pHash();
+  //   hash = anyBase(anyBase.BIN, alphabet.slice(0, base))(hash);
 
-    while (hash.length < maxHashLength[base]) {
-      hash = '0' + hash; // pad out with leading zeros
-    }
+  //   while (hash.length < maxHashLength[base]) {
+  //     hash = '0' + hash; // pad out with leading zeros
+  //   }
 
-    if (isNodePattern(cb)) {
-      cb.call(this, null, hash);
-    }
+  //   if (isNodePattern(cb)) {
+  //     cb.call(this, null, hash);
+  //   }
 
-    return hash;
-  }
+  //   return hash;
+  // }
 
-  /**
-   * Calculates the perceptual hash
-   * @returns {number} the perceptual hash
-   */
-  pHash() {
-    const pHash = new ImagePHash();
-    return pHash.getHash(this);
-  }
+  // /**
+  //  * Calculates the perceptual hash
+  //  * @returns {number} the perceptual hash
+  //  */
+  // pHash() {
+  //   const pHash = new ImagePHash();
+  //   return pHash.getHash(this);
+  // }
 
-  /**
-   * Calculates the hamming distance of the current image and a hash based on their perceptual hash
-   * @param {hash} compareHash hash to compare to
-   * @returns {number} a number ranging from 0 to 1, 0 means they are believed to be identical
-   */
-  distanceFromHash(compareHash) {
-    const pHash = new ImagePHash();
-    const currentHash = pHash.getHash(this);
+  // /**
+  //  * Calculates the hamming distance of the current image and a hash based on their perceptual hash
+  //  * @param {hash} compareHash hash to compare to
+  //  * @returns {number} a number ranging from 0 to 1, 0 means they are believed to be identical
+  //  */
+  // distanceFromHash(compareHash) {
+  //   const pHash = new ImagePHash();
+  //   const currentHash = pHash.getHash(this);
 
-    return pHash.distance(currentHash, compareHash);
-  }
+  //   return pHash.distance(currentHash, compareHash);
+  // }
 
   /**
    * Converts the image to a buffer
@@ -739,83 +738,83 @@ class Jimp extends EventEmitter {
     return i;
   }
 
-  /**
-   * Returns the hex colour value of a pixel
-   * @param {number} x the x coordinate
-   * @param {number} y the y coordinate
-   * @param {function(Error, Jimp)} cb (optional) a callback for when complete
-   * @returns {number} the color of the pixel
-   */
-  getPixelColor(x, y, cb) {
-    if (typeof x !== 'number' || typeof y !== 'number')
-      return throwError.call(this, 'x and y must be numbers', cb);
+  // /**
+  //  * Returns the hex colour value of a pixel
+  //  * @param {number} x the x coordinate
+  //  * @param {number} y the y coordinate
+  //  * @param {function(Error, Jimp)} cb (optional) a callback for when complete
+  //  * @returns {number} the color of the pixel
+  //  */
+  // getPixelColor(x, y, cb) {
+  //   if (typeof x !== 'number' || typeof y !== 'number')
+  //     return throwError.call(this, 'x and y must be numbers', cb);
 
-    // round input
-    x = Math.round(x);
-    y = Math.round(y);
+  //   // round input
+  //   x = Math.round(x);
+  //   y = Math.round(y);
 
-    const idx = this.getPixelIndex(x, y);
-    const hex = this.bitmap.data.readUInt32BE(idx);
+  //   const idx = this.getPixelIndex(x, y);
+  //   const hex = this.bitmap.data.readUInt32BE(idx);
 
-    if (isNodePattern(cb)) {
-      cb.call(this, null, hex);
-    }
+  //   if (isNodePattern(cb)) {
+  //     cb.call(this, null, hex);
+  //   }
 
-    return hex;
-  }
+  //   return hex;
+  // }
 
-  getPixelColour = this.getPixelColor;
+  // getPixelColour = this.getPixelColor;
 
-  /**
-   * Returns the hex colour value of a pixel
-   * @param {number} hex color to set
-   * @param {number} x the x coordinate
-   * @param {number} y the y coordinate
-   * @param {function(Error, Jimp)} cb (optional) a callback for when complete
-   * @returns {number} the index of the pixel or -1 if not found
-   */
-  setPixelColor(hex, x, y, cb) {
-    if (
-      typeof hex !== 'number' ||
-      typeof x !== 'number' ||
-      typeof y !== 'number'
-    )
-      return throwError.call(this, 'hex, x and y must be numbers', cb);
+  // /**
+  //  * Returns the hex colour value of a pixel
+  //  * @param {number} hex color to set
+  //  * @param {number} x the x coordinate
+  //  * @param {number} y the y coordinate
+  //  * @param {function(Error, Jimp)} cb (optional) a callback for when complete
+  //  * @returns {number} the index of the pixel or -1 if not found
+  //  */
+  // setPixelColor(hex, x, y, cb) {
+  //   if (
+  //     typeof hex !== 'number' ||
+  //     typeof x !== 'number' ||
+  //     typeof y !== 'number'
+  //   )
+  //     return throwError.call(this, 'hex, x and y must be numbers', cb);
 
-    // round input
-    x = Math.round(x);
-    y = Math.round(y);
+  //   // round input
+  //   x = Math.round(x);
+  //   y = Math.round(y);
 
-    const idx = this.getPixelIndex(x, y);
-    this.bitmap.data.writeUInt32BE(hex, idx);
+  //   const idx = this.getPixelIndex(x, y);
+  //   this.bitmap.data.writeUInt32BE(hex, idx);
 
-    if (isNodePattern(cb)) {
-      cb.call(this, null, this);
-    }
+  //   if (isNodePattern(cb)) {
+  //     cb.call(this, null, this);
+  //   }
 
-    return this;
-  }
+  //   return this;
+  // }
 
-  setPixelColour = this.setPixelColor;
+  // setPixelColour = this.setPixelColor;
 
-  /**
-   * Determine if the image contains opaque pixels.
-   * @return {boolean} hasAlpha whether the image contains opaque pixels
-   */
-  hasAlpha() {
-    for (let yIndex = 0; yIndex < this.bitmap.height; yIndex++) {
-      for (let xIndex = 0; xIndex < this.bitmap.width; xIndex++) {
-        const idx = (this.bitmap.width * yIndex + xIndex) << 2;
-        const alpha = this.bitmap.data[idx + 3];
+  // /**
+  //  * Determine if the image contains opaque pixels.
+  //  * @return {boolean} hasAlpha whether the image contains opaque pixels
+  //  */
+  // hasAlpha() {
+  //   for (let yIndex = 0; yIndex < this.bitmap.height; yIndex++) {
+  //     for (let xIndex = 0; xIndex < this.bitmap.width; xIndex++) {
+  //       const idx = (this.bitmap.width * yIndex + xIndex) << 2;
+  //       const alpha = this.bitmap.data[idx + 3];
 
-        if (alpha !== 0xff) {
-          return true;
-        }
-      }
-    }
+  //       if (alpha !== 0xff) {
+  //         return true;
+  //       }
+  //     }
+  //   }
 
-    return false;
-  }
+  //   return false;
+  // }
 
   /**
    * Iterate scan through a region of the bitmap
@@ -850,8 +849,8 @@ export function addJimpMethods(methods, jimpInstance = Jimp) {
   });
 }
 
-addConstants(constants);
-addJimpMethods({ composite });
+ addConstants(constants);
+ addJimpMethods({ composite });
 
 Jimp.__extraConstructors = [];
 
@@ -880,105 +879,105 @@ Jimp.read = function(...args) {
 
 Jimp.create = Jimp.read;
 
-/**
- * A static helper method that converts RGBA values to a single integer value
- * @param {number} r the red value (0-255)
- * @param {number} g the green value (0-255)
- * @param {number} b the blue value (0-255)
- * @param {number} a the alpha value (0-255)
- * @param {function(Error, Jimp)} cb (optional) A callback for when complete
- * @returns {number} an single integer colour value
- */
-Jimp.rgbaToInt = function(r, g, b, a, cb) {
-  if (
-    typeof r !== 'number' ||
-    typeof g !== 'number' ||
-    typeof b !== 'number' ||
-    typeof a !== 'number'
-  ) {
-    return throwError.call(this, 'r, g, b and a must be numbers', cb);
-  }
+// /**
+//  * A static helper method that converts RGBA values to a single integer value
+//  * @param {number} r the red value (0-255)
+//  * @param {number} g the green value (0-255)
+//  * @param {number} b the blue value (0-255)
+//  * @param {number} a the alpha value (0-255)
+//  * @param {function(Error, Jimp)} cb (optional) A callback for when complete
+//  * @returns {number} an single integer colour value
+//  */
+// Jimp.rgbaToInt = function(r, g, b, a, cb) {
+//   if (
+//     typeof r !== 'number' ||
+//     typeof g !== 'number' ||
+//     typeof b !== 'number' ||
+//     typeof a !== 'number'
+//   ) {
+//     return throwError.call(this, 'r, g, b and a must be numbers', cb);
+//   }
 
-  if (r < 0 || r > 255) {
-    return throwError.call(this, 'r must be between 0 and 255', cb);
-  }
+//   if (r < 0 || r > 255) {
+//     return throwError.call(this, 'r must be between 0 and 255', cb);
+//   }
 
-  if (g < 0 || g > 255) {
-    throwError.call(this, 'g must be between 0 and 255', cb);
-  }
+//   if (g < 0 || g > 255) {
+//     throwError.call(this, 'g must be between 0 and 255', cb);
+//   }
 
-  if (b < 0 || b > 255) {
-    return throwError.call(this, 'b must be between 0 and 255', cb);
-  }
+//   if (b < 0 || b > 255) {
+//     return throwError.call(this, 'b must be between 0 and 255', cb);
+//   }
 
-  if (a < 0 || a > 255) {
-    return throwError.call(this, 'a must be between 0 and 255', cb);
-  }
+//   if (a < 0 || a > 255) {
+//     return throwError.call(this, 'a must be between 0 and 255', cb);
+//   }
 
-  r = Math.round(r);
-  b = Math.round(b);
-  g = Math.round(g);
-  a = Math.round(a);
+//   r = Math.round(r);
+//   b = Math.round(b);
+//   g = Math.round(g);
+//   a = Math.round(a);
 
-  const i =
-    r * Math.pow(256, 3) +
-    g * Math.pow(256, 2) +
-    b * Math.pow(256, 1) +
-    a * Math.pow(256, 0);
+//   const i =
+//     r * Math.pow(256, 3) +
+//     g * Math.pow(256, 2) +
+//     b * Math.pow(256, 1) +
+//     a * Math.pow(256, 0);
 
-  if (isNodePattern(cb)) {
-    cb.call(this, null, i);
-  }
+//   if (isNodePattern(cb)) {
+//     cb.call(this, null, i);
+//   }
 
-  return i;
-};
+//   return i;
+// };
 
-/**
- * A static helper method that converts RGBA values to a single integer value
- * @param {number} i a single integer value representing an RGBA colour (e.g. 0xFF0000FF for red)
- * @param {function(Error, Jimp)} cb (optional) A callback for when complete
- * @returns {object} an object with the properties r, g, b and a representing RGBA values
- */
-Jimp.intToRGBA = function(i, cb) {
-  if (typeof i !== 'number') {
-    return throwError.call(this, 'i must be a number', cb);
-  }
+// /**
+//  * A static helper method that converts RGBA values to a single integer value
+//  * @param {number} i a single integer value representing an RGBA colour (e.g. 0xFF0000FF for red)
+//  * @param {function(Error, Jimp)} cb (optional) A callback for when complete
+//  * @returns {object} an object with the properties r, g, b and a representing RGBA values
+//  */
+// Jimp.intToRGBA = function(i, cb) {
+//   if (typeof i !== 'number') {
+//     return throwError.call(this, 'i must be a number', cb);
+//   }
 
-  const rgba = {};
+//   const rgba = {};
 
-  rgba.r = Math.floor(i / Math.pow(256, 3));
-  rgba.g = Math.floor((i - rgba.r * Math.pow(256, 3)) / Math.pow(256, 2));
-  rgba.b = Math.floor(
-    (i - rgba.r * Math.pow(256, 3) - rgba.g * Math.pow(256, 2)) /
-      Math.pow(256, 1)
-  );
-  rgba.a = Math.floor(
-    (i -
-      rgba.r * Math.pow(256, 3) -
-      rgba.g * Math.pow(256, 2) -
-      rgba.b * Math.pow(256, 1)) /
-      Math.pow(256, 0)
-  );
+//   rgba.r = Math.floor(i / Math.pow(256, 3));
+//   rgba.g = Math.floor((i - rgba.r * Math.pow(256, 3)) / Math.pow(256, 2));
+//   rgba.b = Math.floor(
+//     (i - rgba.r * Math.pow(256, 3) - rgba.g * Math.pow(256, 2)) /
+//       Math.pow(256, 1)
+//   );
+//   rgba.a = Math.floor(
+//     (i -
+//       rgba.r * Math.pow(256, 3) -
+//       rgba.g * Math.pow(256, 2) -
+//       rgba.b * Math.pow(256, 1)) /
+//       Math.pow(256, 0)
+//   );
 
-  if (isNodePattern(cb)) {
-    cb.call(this, null, rgba);
-  }
+//   if (isNodePattern(cb)) {
+//     cb.call(this, null, rgba);
+//   }
 
-  return rgba;
-};
+//   return rgba;
+// };
 
-/**
- * Converts a css color (Hex, 8-digit (RGBA) Hex, RGB, RGBA, HSL, HSLA, HSV, HSVA, Named) to a hex number
- * @param {string} cssColor a number
- * @returns {number} a hex number representing a color
- */
-Jimp.cssColorToHex = function(cssColor) {
-  cssColor = cssColor || 0; // 0, null, undefined, NaN
+// /**
+//  * Converts a css color (Hex, 8-digit (RGBA) Hex, RGB, RGBA, HSL, HSLA, HSV, HSVA, Named) to a hex number
+//  * @param {string} cssColor a number
+//  * @returns {number} a hex number representing a color
+//  */
+// Jimp.cssColorToHex = function(cssColor) {
+//   cssColor = cssColor || 0; // 0, null, undefined, NaN
 
-  if (typeof cssColor === 'number') return Number(cssColor);
+//   if (typeof cssColor === 'number') return Number(cssColor);
 
-  return parseInt(tinyColor(cssColor).toHex8(), 16);
-};
+//   return parseInt(tinyColor(cssColor).toHex8(), 16);
+// };
 
 /**
  * Limits a number to between 0 or 255
@@ -999,43 +998,43 @@ Jimp.limit255 = function(n) {
  * @param {number} threshold (optional) a number, 0 to 1, the smaller the value the more sensitive the comparison (default: 0.1)
  * @returns {object} an object { percent: percent similar, diff: a Jimp image highlighting differences }
  */
-Jimp.diff = function(img1, img2, threshold = 0.1) {
-  if (!(img1 instanceof Jimp) || !(img2 instanceof Jimp))
-    return throwError.call(this, 'img1 and img2 must be an Jimp images');
+// Jimp.diff = function(img1, img2, threshold = 0.1) {
+//   if (!(img1 instanceof Jimp) || !(img2 instanceof Jimp))
+//     return throwError.call(this, 'img1 and img2 must be an Jimp images');
 
-  const bmp1 = img1.bitmap;
-  const bmp2 = img2.bitmap;
+//   const bmp1 = img1.bitmap;
+//   const bmp2 = img2.bitmap;
 
-  if (bmp1.width !== bmp2.width || bmp1.height !== bmp2.height) {
-    if (bmp1.width * bmp1.height > bmp2.width * bmp2.height) {
-      // img1 is bigger
-      img1 = img1.cloneQuiet().resize(bmp2.width, bmp2.height);
-    } else {
-      // img2 is bigger (or they are the same in area)
-      img2 = img2.cloneQuiet().resize(bmp1.width, bmp1.height);
-    }
-  }
+//   if (bmp1.width !== bmp2.width || bmp1.height !== bmp2.height) {
+//     if (bmp1.width * bmp1.height > bmp2.width * bmp2.height) {
+//       // img1 is bigger
+//       img1 = img1.cloneQuiet().resize(bmp2.width, bmp2.height);
+//     } else {
+//       // img2 is bigger (or they are the same in area)
+//       img2 = img2.cloneQuiet().resize(bmp1.width, bmp1.height);
+//     }
+//   }
 
-  if (typeof threshold !== 'number' || threshold < 0 || threshold > 1) {
-    return throwError.call(this, 'threshold must be a number between 0 and 1');
-  }
+//   if (typeof threshold !== 'number' || threshold < 0 || threshold > 1) {
+//     return throwError.call(this, 'threshold must be a number between 0 and 1');
+//   }
 
-  const diff = new Jimp(bmp1.width, bmp1.height, 0xffffffff);
+//   const diff = new Jimp(bmp1.width, bmp1.height, 0xffffffff);
 
-  const numDiffPixels = pixelMatch(
-    bmp1.data,
-    bmp2.data,
-    diff.bitmap.data,
-    diff.bitmap.width,
-    diff.bitmap.height,
-    { threshold }
-  );
+//   const numDiffPixels = pixelMatch(
+//     bmp1.data,
+//     bmp2.data,
+//     diff.bitmap.data,
+//     diff.bitmap.width,
+//     diff.bitmap.height,
+//     { threshold }
+//   );
 
-  return {
-    percent: numDiffPixels / (diff.bitmap.width * diff.bitmap.height),
-    image: diff
-  };
-};
+//   return {
+//     percent: numDiffPixels / (diff.bitmap.width * diff.bitmap.height),
+//     image: diff
+//   };
+// };
 
 /**
  * Calculates the hamming distance of two images based on their perceptual hash
@@ -1043,13 +1042,13 @@ Jimp.diff = function(img1, img2, threshold = 0.1) {
  * @param {Jimp} img2 a Jimp image to compare
  * @returns {number} a number ranging from 0 to 1, 0 means they are believed to be identical
  */
-Jimp.distance = function(img1, img2) {
-  const phash = new ImagePHash();
-  const hash1 = phash.getHash(img1);
-  const hash2 = phash.getHash(img2);
+// Jimp.distance = function(img1, img2) {
+//   const phash = new ImagePHash();
+//   const hash1 = phash.getHash(img1);
+//   const hash2 = phash.getHash(img2);
 
-  return phash.distance(hash1, hash2);
-};
+//   return phash.distance(hash1, hash2);
+// };
 
 /**
  * Calculates the hamming distance of two images based on their perceptual hash
@@ -1057,11 +1056,11 @@ Jimp.distance = function(img1, img2) {
  * @param {hash} hash2 a pHash
  * @returns {number} a number ranging from 0 to 1, 0 means they are believed to be identical
  */
-Jimp.compareHashes = function(hash1, hash2) {
-  const phash = new ImagePHash();
+// Jimp.compareHashes = function(hash1, hash2) {
+//   const phash = new ImagePHash();
 
-  return phash.distance(hash1, hash2);
-};
+//   return phash.distance(hash1, hash2);
+// };
 
 /**
  * Compute color difference
@@ -1072,26 +1071,26 @@ Jimp.compareHashes = function(hash1, hash2) {
  * Where `a` is optional and `val` is an integer between 0 and 255.
  * @returns {number} float between 0 and 1.
  */
-Jimp.colorDiff = function(rgba1, rgba2) {
-  const pow = n => Math.pow(n, 2);
-  const { max } = Math;
-  const maxVal = 255 * 255 * 3;
+// Jimp.colorDiff = function(rgba1, rgba2) {
+//   const pow = n => Math.pow(n, 2);
+//   const { max } = Math;
+//   const maxVal = 255 * 255 * 3;
 
-  if (rgba1.a !== 0 && !rgba1.a) {
-    rgba1.a = 255;
-  }
+//   if (rgba1.a !== 0 && !rgba1.a) {
+//     rgba1.a = 255;
+//   }
 
-  if (rgba2.a !== 0 && !rgba2.a) {
-    rgba2.a = 255;
-  }
+//   if (rgba2.a !== 0 && !rgba2.a) {
+//     rgba2.a = 255;
+//   }
 
-  return (
-    (max(pow(rgba1.r - rgba2.r), pow(rgba1.r - rgba2.r - rgba1.a + rgba2.a)) +
-      max(pow(rgba1.g - rgba2.g), pow(rgba1.g - rgba2.g - rgba1.a + rgba2.a)) +
-      max(pow(rgba1.b - rgba2.b), pow(rgba1.b - rgba2.b - rgba1.a + rgba2.a))) /
-    maxVal
-  );
-};
+//   return (
+//     (max(pow(rgba1.r - rgba2.r), pow(rgba1.r - rgba2.r - rgba1.a + rgba2.a)) +
+//       max(pow(rgba1.g - rgba2.g), pow(rgba1.g - rgba2.g - rgba1.a + rgba2.a)) +
+//       max(pow(rgba1.b - rgba2.b), pow(rgba1.b - rgba2.b - rgba1.a + rgba2.a))) /
+//     maxVal
+//   );
+// };
 
 /**
  * Helper to create Jimp methods that emit events before and after its execution.

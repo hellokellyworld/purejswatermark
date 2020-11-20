@@ -196,7 +196,7 @@ function compositeBitmapOverBackground(Jimp, image) {
  * @param {function(Error, Jimp)} cb a Node-style function to call with the buffer as the second argument
  * @returns {Jimp} this for chaining of methods
  */
-export function getBuffer(mime, cb) {
+export async function getBuffer(mime, cb) {
   if (mime === constants.AUTO) {
     // allow auto MIME detection
     mime = this.getMIME();
@@ -224,7 +224,7 @@ export function getBuffer(mime, cb) {
   }
 
   if (this.constructor.encoders[mime]) {
-    const buffer = this.constructor.encoders[mime](this);
+    const buffer = await this.constructor.encoders[mime](this); //Kelly and Tom added await
     cb.call(this, null, buffer);
   } else {
     cb.call(this, 'Unsupported MIME type: ' + mime);
