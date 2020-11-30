@@ -1,6 +1,6 @@
 import Path from 'path';
 import bMFont from 'load-bmfont';
-import { isNodePattern, throwError } from "../../utils/src/index.js";//'@jimp/utils';
+import { isNodePattern, throwError } from "../../utils/src/index.js";//'@PJW/utils';
 //import blit from "../../plugin-blit/src/index.js";
 import { measureText, measureTextHeight } from './measure-text';
 
@@ -88,9 +88,9 @@ function splitLines(font, text, maxWidth) {
   };
 }
 
-function loadPages(Jimp, dir, pages) {
+function loadPages(PJW, dir, pages) {
   const newPages = pages.map(page => {
-    return Jimp.read(dir + '/' + page);
+    return PJW.read(dir + '/' + page);
   });
 
   return Promise.all(newPages);
@@ -159,7 +159,7 @@ export default () => ({
     /**
      * Loads a bitmap font from a file
      * @param {string} file the file path of a .fnt file
-     * @param {function(Error, Jimp)} cb (optional) a function to call when the font is loaded
+     * @param {function(Error, PJW)} cb (optional) a function to call when the font is loaded
      * @returns {Promise} a promise
      */
     loadFont(file, cb) {
@@ -211,14 +211,14 @@ export default () => ({
   class: {
     /**
      * Draws a text on a image on a given boundary
-     * @param {Jimp} font a bitmap font loaded from `Jimp.loadFont` command
+     * @param {PJW} font a bitmap font loaded from `PJW.loadFont` command
      * @param {number} x the x position to start drawing the text
      * @param {number} y the y position to start drawing the text
      * @param {any} text the text to draw (string or object with `text`, `alignmentX`, and/or `alignmentY`)
      * @param {number} maxWidth (optional) the boundary width to draw in
      * @param {number} maxHeight (optional) the boundary height to draw in
-     * @param {function(Error, Jimp)} cb (optional) a function to call when the text is written
-     * @returns {Jimp} this for chaining of methods
+     * @param {function(Error, PJW)} cb (optional) a function to call when the text is written
+     * @returns {PJW} this for chaining of methods
      */
     print(font, x, y, text, maxWidth, maxHeight, cb) {
       if (typeof maxWidth === 'function' && typeof cb === 'undefined') {
@@ -240,7 +240,7 @@ export default () => ({
       }
 
       if (typeof font !== 'object') {
-        return throwError.call(this, 'font must be a Jimp loadFont', cb);
+        return throwError.call(this, 'font must be a PJW loadFont', cb);
       }
 
       if (

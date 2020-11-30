@@ -1,23 +1,23 @@
-const Jimp = require('../jimp/src/index.js');
+const PJW = require('../PJW/src/index.js');
 
 const defaultOptions = {
     ratio: 0.6,
     opacity: 0.6,
     dstPath: './watermark.jpg',
-    text: 'jimp-watermark',
+    text: 'PJW-watermark',
     textSize: 1,
 }
 
 
 const SizeEnum = Object.freeze({
-    1: Jimp.FONT_SANS_8_BLACK,
-    2: Jimp.FONT_SANS_10_BLACK,
-    3: Jimp.FONT_SANS_12_BLACK,
-    4: Jimp.FONT_SANS_14_BLACK,
-    5: Jimp.FONT_SANS_16_BLACK,
-    6: Jimp.FONT_SANS_32_BLACK,
-    7: Jimp.FONT_SANS_64_BLACK,
-    8: Jimp.FONT_SANS_128_BLACK,
+    1: PJW.FONT_SANS_8_BLACK,
+    2: PJW.FONT_SANS_10_BLACK,
+    3: PJW.FONT_SANS_12_BLACK,
+    4: PJW.FONT_SANS_14_BLACK,
+    5: PJW.FONT_SANS_16_BLACK,
+    6: PJW.FONT_SANS_32_BLACK,
+    7: PJW.FONT_SANS_64_BLACK,
+    8: PJW.FONT_SANS_128_BLACK,
 })
 const ErrorTextSize = new Error("Text size must range from 1 - 8");
 const ErrorScaleRatio = new Error("Scale Ratio must be less than one!");
@@ -56,17 +56,17 @@ const checkOptions = (options) => {
 module.exports.addTextWatermark = async (mainImage, options) => {
     try {
         options = checkOptions(options);
-        const main = await Jimp.read(mainImage);
+        const main = await PJW.read(mainImage);
         const maxHeight = main.getHeight();
         const maxWidth = main.getWidth();
         if (Object.keys(SizeEnum).includes(String(options.textSize))) {
-            const font = await Jimp.loadFont(SizeEnum[options.textSize]);
+            const font = await PJW.loadFont(SizeEnum[options.textSize]);
             const X = 0,        //Always center aligned
                 Y = 0
              const finalImage= await main.print(font, X, Y, {
                 text: options.text,
-                alignmentX: Jimp.HORIZONTAL_ALIGN_CENTER,
-                alignmentY: Jimp.VERTICAL_ALIGN_MIDDLE
+                alignmentX: PJW.HORIZONTAL_ALIGN_CENTER,
+                alignmentY: PJW.VERTICAL_ALIGN_MIDDLE
             }, maxWidth, maxHeight);
             finalImage.quality(100)
             const mime =  await finalImage.getMIME();
@@ -98,9 +98,9 @@ module.exports.addTextWatermark = async (mainImage, options) => {
 const addWatermark = async(mainImage, watermarkImage, options) => {
    // let result;
     try{  options = checkOptions(options);
-        const main = await Jimp.read(mainImage);
+        const main = await PJW.read(mainImage);
         console.log("this is main",main)
-        const watermark = await Jimp.read(watermarkImage);
+        const watermark = await PJW.read(watermarkImage);
         const [newHeight, newWidth] = getDimensions(main.getHeight(), main.getWidth(), watermark.getHeight(), watermark.getWidth(), options.ratio);
         watermark.resize(newWidth, newHeight);
         const positionX = (main.getWidth() - newWidth) / 2;     //Centre aligned
@@ -109,7 +109,7 @@ const addWatermark = async(mainImage, watermarkImage, options) => {
         main.composite(watermark,
             positionX,
             positionY,
-            Jimp.HORIZONTAL_ALIGN_CENTER | Jimp.VERTICAL_ALIGN_MIDDLE);
+            PJW.HORIZONTAL_ALIGN_CENTER | PJW.VERTICAL_ALIGN_MIDDLE);
         main.quality(100)//.write(options.dstPath);
         const mime =  await main.getMIME();       
         console.log("this is mime",mime)   

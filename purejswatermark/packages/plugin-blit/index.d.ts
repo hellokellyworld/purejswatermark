@@ -1,9 +1,9 @@
-import { Jimp, ImageCallback } from '@jimp/core';
+import { PJW, ImageCallback } from '@PJW/core';
 
 interface Blit {
-  blit(src: Jimp, x: number, y: number, cb?: ImageCallback<this>): this;
+  blit(src: PJW, x: number, y: number, cb?: ImageCallback<this>): this;
   blit(
-    src: Jimp,
+    src: PJW,
     x: number,
     y: number,
     srcx: number,

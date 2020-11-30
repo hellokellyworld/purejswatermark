@@ -1,7 +1,7 @@
 import fileType from 'file-type';
 
 import EXIFParser from 'exif-parser';
-import { throwError } from "../../../utils/src/index.js"//'@jimp/utils';
+import { throwError } from "../../../utils/src/index.js"//'@PJW/utils';
 
 import * as constants from '../constants';
 import * as MIME from './mime';
@@ -27,7 +27,7 @@ function getMIMEFromBuffer(buffer, path) {
 /*
  * Obtains image orientation from EXIF metadata.
  *
- * @param img {Jimp} a Jimp image object
+ * @param img {PJW} a PJW image object
  * @returns {number} a number 1-8 representing EXIF orientation,
  *          in particular 1 if orientation tag is missing
  */
@@ -41,7 +41,7 @@ function getExifOrientation(img) {
  *
  * Transformation reference: http://sylvana.net/jpegcrop/exif_orientation.html.
  *
- * @param img {Jimp} a Jimp image object
+ * @param img {PJW} a PJW image object
  * @returns {function} transformation function for transformBitmap().
  */
 function getExifOrientationTransformation(img) {
@@ -97,7 +97,7 @@ function getExifOrientationTransformation(img) {
  * Transforms bitmap in place (moves pixels around) according to given
  * transformation function.
  *
- * @param img {Jimp} a Jimp image object, which bitmap is supposed to
+ * @param img {PJW} a PJW image object, which bitmap is supposed to
  *        be transformed
  * @param width {number} bitmap width after the transformation
  * @param height {number} bitmap height after the transformation
@@ -134,7 +134,7 @@ function transformBitmap(img, width, height, transformation) {
 
 /*
  * Automagically rotates an image based on its EXIF data (if present).
- * @param img {Jimp} a Jimp image object
+ * @param img {PJW} a PJW image object
  */
 function exifRotate(img) {
   if (getExifOrientation(img) < 2) return;
@@ -148,7 +148,7 @@ function exifRotate(img) {
   transformBitmap(img, newWidth, newHeight, transformation);
 }
 
-// parses a bitmap from the constructor to the JIMP bitmap property
+// parses a bitmap from the constructor to the PJW bitmap property
 export function parseBitmap(data, path, cb) {
   const mime = getMIMEFromBuffer(data, path);
 
@@ -182,8 +182,8 @@ export function parseBitmap(data, path, cb) {
   return this;
 }
 
-function compositeBitmapOverBackground(Jimp, image) {
-  return new Jimp(
+function compositeBitmapOverBackground(PJW, image) {
+  return new PJW(
     image.bitmap.width,
     image.bitmap.height,
     image._background
@@ -193,8 +193,8 @@ function compositeBitmapOverBackground(Jimp, image) {
 /**
  * Converts the image to a buffer
  * @param {string} mime the mime type of the image buffer to be created
- * @param {function(Error, Jimp)} cb a Node-style function to call with the buffer as the second argument
- * @returns {Jimp} this for chaining of methods
+ * @param {function(Error, PJW)} cb a Node-style function to call with the buffer as the second argument
+ * @returns {PJW} this for chaining of methods
  */
 export async function getBuffer(mime, cb) {
   if (mime === constants.AUTO) {

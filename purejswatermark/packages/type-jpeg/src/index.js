@@ -1,5 +1,5 @@
 import JPEG from 'jpeg-js';
-import { throwError, isNodePattern } from "../../utils/src/index.js"//'@jimp/utils';
+import { throwError, isNodePattern } from "../../utils/src/index.js"//'@PJW/utils';
 
 const MIME_TYPE = 'image/jpeg';
 
@@ -24,8 +24,8 @@ export default () => ({
     /**
      * Sets the quality of the image when saving as JPEG format (default is 100)
      * @param {number} n The quality to use 0-100
-     * @param {function(Error, Jimp)} cb (optional) a callback for when complete
-     * @returns {Jimp} this for chaining of methods
+     * @param {function(Error, PJW)} cb (optional) a callback for when complete
+     * @returns {PJW} this for chaining of methods
      */
     quality(n, cb) {
       if (typeof n !== 'number') {

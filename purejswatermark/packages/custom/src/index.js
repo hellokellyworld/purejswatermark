@@ -1,12 +1,12 @@
-import Jimp, {
+import PJW, {
   addType,
-  addJimpMethods,
+  addPJWMethods,
   addConstants,
-  jimpEvChange
-} from "../../core/src/index.js" //'@jimp/core';
+  PJWEvChange
+} from "../../core/src/index.js" //'@PJW/core';
 
-export default function configure(configuration, jimpInstance = Jimp) {
-  const jimpConfig = {
+export default function configure(configuration, PJWInstance = PJW) {
+  const PJWConfig = {
     hasAlpha: {},
     encoders: {},
     decoders: {},
@@ -16,8 +16,8 @@ export default function configure(configuration, jimpInstance = Jimp) {
 
   function addToConfig(newConfig) {
     Object.entries(newConfig).forEach(([key, value]) => {
-      jimpConfig[key] = {
-        ...jimpConfig[key],
+      PJWConfig[key] = {
+        ...PJWConfig[key],
         ...value
       };
     });
@@ -37,7 +37,7 @@ export default function configure(configuration, jimpInstance = Jimp) {
   }
 
   function addPlugin(pluginModule) {
-    const plugin = pluginModule(jimpEvChange) || {};
+    const plugin = pluginModule(PJWEvChange) || {};
     if (!plugin.class && !plugin.constants) {
       // Default to class function
       addToConfig({ class: plugin });
@@ -49,17 +49,17 @@ export default function configure(configuration, jimpInstance = Jimp) {
   if (configuration.types) {
     configuration.types.forEach(addImageType);
 
-    jimpInstance.decoders = {
-      ...jimpInstance.decoders,
-      ...jimpConfig.decoders
+    PJWInstance.decoders = {
+      ...PJWInstance.decoders,
+      ...PJWConfig.decoders
     };
-    jimpInstance.encoders = {
-      ...jimpInstance.encoders,
-      ...jimpConfig.encoders
+    PJWInstance.encoders = {
+      ...PJWInstance.encoders,
+      ...PJWConfig.encoders
     };
-    jimpInstance.hasAlpha = {
-      ...jimpInstance.hasAlpha,
-      ...jimpConfig.hasAlpha
+    PJWInstance.hasAlpha = {
+      ...PJWInstance.hasAlpha,
+      ...PJWConfig.hasAlpha
     };
   }
 
@@ -67,8 +67,8 @@ export default function configure(configuration, jimpInstance = Jimp) {
     configuration.plugins.forEach(addPlugin);
   }
 
-  addJimpMethods(jimpConfig.class, jimpInstance);
-  addConstants(jimpConfig.constants, jimpInstance);
+  addPJWMethods(PJWConfig.class, PJWInstance);
+  addConstants(PJWConfig.constants, PJWInstance);
 
-  return Jimp;
+  return PJW;
 }

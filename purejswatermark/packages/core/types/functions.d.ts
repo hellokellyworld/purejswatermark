@@ -1,17 +1,17 @@
-import {Jimp} from './jimp';
+import {PJW} from './PJW';
 
 export function addConstants(
   constants: [string, string | number],
-  jimpInstance?: Jimp
+  PJWInstance?: PJW
 ): void;
-export function addJimpMethods(
+export function addPJWMethods(
   methods: [string, Function],
-  jimpInstance?: Jimp
+  PJWInstance?: PJW
 ): void;
-export function jimpEvMethod(
+export function PJWEvMethod(
   methodName: string,
   evName: string,
   method: Function
 ): void;
-export function jimpEvChange(methodName: string, method: Function): void;
+export function PJWEvChange(methodName: string, method: Function): void;
 export function addType(mime: string, extensions: string[]): void;

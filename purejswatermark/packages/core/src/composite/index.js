@@ -1,16 +1,16 @@
-import { isNodePattern, throwError } from "../../../utils/src/index.js"//'@jimp/utils';
+import { isNodePattern, throwError } from "../../../utils/src/index.js"//'@PJW/utils';
 import * as constants from '../constants';
 
 import * as compositeModes from './composite-modes';
 
 /**
  * Composites a source image over to this image respecting alpha channels
- * @param {Jimp} src the source Jimp instance
+ * @param {PJW} src the source PJW instance
  * @param {number} x the x position to blit the image
  * @param {number} y the y position to blit the image
  * @param {object} options determine what mode to use
- * @param {function(Error, Jimp)} cb (optional) a callback for when complete
- * @returns {Jimp} this for chaining of methods
+ * @param {function(Error, PJW)} cb (optional) a callback for when complete
+ * @returns {PJW} this for chaining of methods
  */
 export default function composite(src, x, y, options = {}, cb) {
   if (typeof options === 'function') {
@@ -19,7 +19,7 @@ export default function composite(src, x, y, options = {}, cb) {
   }
 
   if (!(src instanceof this.constructor)) {
-    return throwError.call(this, 'The source must be a Jimp image', cb);
+    return throwError.call(this, 'The source must be a PJW image', cb);
   }
 
   if (typeof x !== 'number' || typeof y !== 'number') {

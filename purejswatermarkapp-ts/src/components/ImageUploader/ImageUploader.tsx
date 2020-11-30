@@ -3,7 +3,7 @@ import Dropzone from "react-dropzone";
 import { Cropper } from "react-image-cropper";
 import autobind from "autobind-decorator";
 import "./ImageUploader.scss";
-import * as Jimp from "jimp";
+import * as PJW from "PJW";
 import { resolve } from "path";
 import { read, readFile } from "fs";
 import { number } from "prop-types";
@@ -247,7 +247,7 @@ export default class ImageUploader extends React.Component<
               className={"confirm"}
               onClick={() => {
                 const buffer = ready.originalImageData;
-                Jimp.read(buffer)
+                PJW.read(buffer)
                   .then(image => {
                     image.rotate(-90);
                     const mime = image.getMIME();
@@ -422,7 +422,7 @@ export default class ImageUploader extends React.Component<
     const oldPreview = img.preview;
     const oldName = img.name;
     const buffer = img.originalImageData;
-    Jimp.read(buffer).then(image => {
+    PJW.read(buffer).then(image => {
       const mime = image.getMIME();
       image.rotate(-90);
       image

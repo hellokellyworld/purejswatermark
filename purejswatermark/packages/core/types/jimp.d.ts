@@ -22,8 +22,8 @@ interface ScanIteratorReturn<This> {
   image: This;
 }
 
-export interface JimpConstructors {
-  prototype: Jimp;
+export interface PJWConstructors {
+  prototype: PJW;
   // Constants
   AUTO: -1;
   // blend modes
@@ -53,7 +53,7 @@ export interface JimpConstructors {
   // Constructors
   new(path: string, cb?: ImageCallback<this['prototype']>): this['prototype'];
   new(urlOptions: URLOptions, cb?: ImageCallback<this['prototype']>): this['prototype'];
-  new(image: Jimp, cb?: ImageCallback<this['prototype']>): this['prototype'];
+  new(image: PJW, cb?: ImageCallback<this['prototype']>): this['prototype'];
   new(data: Buffer, cb?: ImageCallback<this['prototype']>): this['prototype'];
   new(data: Bitmap, cb?: ImageCallback<this['prototype']>): this['prototype'];
   new(w: number, h: number, cb?: ImageCallback<this['prototype']>): this['prototype'];
@@ -63,7 +63,7 @@ export interface JimpConstructors {
     background?: number | string,
     cb?: ImageCallback<this['prototype']>
   ): this['prototype'];
-  // For custom constructors when using Jimp.appendConstructorOption
+  // For custom constructors when using PJW.appendConstructorOption
   new(...args: any[]): this['prototype'];
 
   // Functions
@@ -72,18 +72,18 @@ export interface JimpConstructors {
    * it's not possible RN:
    * https://github.com/microsoft/TypeScript/issues/26113
    */
-  appendConstructorOption<Args extends any[], J extends Jimp = this['prototype']>(
+  appendConstructorOption<Args extends any[], J extends PJW = this['prototype']>(
     name: string,
     test: (...args: any[]) => boolean,
     run: (
       this: J,
-      resolve: (jimp?: J) => any,
+      resolve: (PJW?: J) => any,
       reject: (reason: Error) => any,
       ...args: any[]
     ) => any
   ): void;
   read(path: string, cb?: ImageCallback<this['prototype']>): Promise<this['prototype']>;
-  read(image: Jimp, cb?: ImageCallback<this['prototype']>): Promise<this['prototype']>;
+  read(image: PJW, cb?: ImageCallback<this['prototype']>): Promise<this['prototype']>;
   read(data: Buffer, cb?: ImageCallback<this['prototype']>): Promise<this['prototype']>;
   read(
     w: number,
@@ -92,7 +92,7 @@ export interface JimpConstructors {
     cb?: ImageCallback<this['prototype']>
   ): Promise<this['prototype']>;
   create(path: string): Promise<this['prototype']>;
-  create(image: Jimp): Promise<this['prototype']>;
+  create(image: PJW): Promise<this['prototype']>;
   create(data: Buffer): Promise<this['prototype']>;
   create(w: number, h: number, background?: number | string): Promise<this['prototype']>;
   rgbaToInt(
@@ -105,14 +105,14 @@ export interface JimpConstructors {
   intToRGBA(i: number, cb?: GenericCallback<RGBA>): RGBA;
   cssColorToHex(cssColor: string): number;
   limit255(n: number): number;
-  diff(img1: Jimp, img2: Jimp, threshold?: number): DiffReturn<this['prototype']>;
-  distance(img1: Jimp, img2: Jimp): number;
+  diff(img1: PJW, img2: PJW, threshold?: number): DiffReturn<this['prototype']>;
+  distance(img1: PJW, img2: PJW): number;
   compareHashes(hash1: string, hash2: string): number;
   colorDiff(rgba1: RGB, rgba2: RGB): number;
   colorDiff(rgba1: RGBA, rgba2: RGBA): number;
 }
 
-export interface Jimp {
+export interface PJW {
   // Properties
   bitmap: Bitmap;
   _rgba: boolean;
@@ -210,7 +210,7 @@ export interface Jimp {
 
   // Effect methods
   composite(
-    src: Jimp,
+    src: PJW,
     x: number,
     y: number,
     options?: BlendMode,

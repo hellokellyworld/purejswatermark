@@ -1,22 +1,22 @@
-import { throwError, isNodePattern } from "../../utils/src/index.js"//'@jimp/utils';
+import { throwError, isNodePattern } from "../../utils/src/index.js"//'@PJW/utils';
 
 export default () => ({
   /**
    * Blits a source image on to this image
-   * @param {Jimp} src the source Jimp instance
+   * @param {PJW} src the source PJW instance
    * @param {number} x the x position to blit the image
    * @param {number} y the y position to blit the image
    * @param {number} srcx (optional) the x position from which to crop the source image
    * @param {number} srcy (optional) the y position from which to crop the source image
    * @param {number} srcw (optional) the width to which to crop the source image
    * @param {number} srch (optional) the height to which to crop the source image
-   * @param {function(Error, Jimp)} cb (optional) a callback for when complete
-   * @returns {Jimp} this for chaining of methods
+   * @param {function(Error, PJW)} cb (optional) a callback for when complete
+   * @returns {PJW} this for chaining of methods
    */
   //export function 
   blit(src, x, y, srcx, srcy, srcw, srch, cb) {
     if (!(src instanceof this.constructor)) {
-      return throwError.call(this, 'The source must be a Jimp image', cb);
+      return throwError.call(this, 'The source must be a PJW image', cb);
     }
 
     if (typeof x !== 'number' || typeof y !== 'number') {

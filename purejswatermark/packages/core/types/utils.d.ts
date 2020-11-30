@@ -1,6 +1,6 @@
 import {
-  JimpType,
-  JimpPlugin,
+  PJWType,
+  PJWPlugin,
 } from './plugins';
 
 // This is required as providing type arrays gives a union of all the generic
@@ -9,20 +9,20 @@ export type UnionToIntersection<U> =
   (U extends any ? (k: U) => void : never) extends ((k: infer I) => void) ? I : never;
 
 /**
- * The values to be extracted from a WellFormedPlugin to put onto the Jimp instance
+ * The values to be extracted from a WellFormedPlugin to put onto the PJW instance
  * Left loose as "any" in order to enable the GetPluginVal to work properly
  */
 export type WellFormedValues<T extends any> = 
   (T extends {class: infer Class} ? Class : {});
 
 /**
- * The constants to be extracted from a WellFormedPlugin to put onto the Jimp instance
+ * The constants to be extracted from a WellFormedPlugin to put onto the PJW instance
  * Left loose as "any" in order to enable the GetPluginConstants to work properly
  */
 export type WellFormedConstants<T extends any> =
   (T extends {constants: infer Constants} ? Constants : {});
 
-// Util type for the functions that deal with `@jimp/custom`
+// Util type for the functions that deal with `@PJW/custom`
 // Must accept any or no props thanks to typing of the `plugins` intersected function
 export type FunctionRet<T> = Array<(...props: any[] | never) => T>;
 
@@ -55,11 +55,11 @@ type GetPluginFuncArrValues<PluginFuncArr> =
     undefined : undefined;
 
 /**
- * A helper type to get the values to be intersected with `Jimp` to give
+ * A helper type to get the values to be intersected with `PJW` to give
  * the proper typing given an array of functions for plugins and types
  */
 export type GetIntersectionFromPlugins<
-  PluginFuncArr extends FunctionRet<JimpPlugin | JimpType>
+  PluginFuncArr extends FunctionRet<PJWPlugin | PJWType>
 > = UnionToIntersection<Exclude<GetPluginFuncArrValues<PluginFuncArr>, undefined>>;
 
 type GetPluginFuncArrConsts<PluginFuncArr> =
@@ -87,11 +87,11 @@ type GetPluginFuncArrDecoders<PluginFuncArr> =
     undefined : undefined;
 
 /**
- * A helper type to get the statics to be intersected with `Jimp` to give
+ * A helper type to get the statics to be intersected with `PJW` to give
  * the proper typing given an array of functions for plugins and types
  */
 export type GetIntersectionFromPluginsStatics<
-  PluginFuncArr extends FunctionRet<JimpPlugin | JimpType>
+  PluginFuncArr extends FunctionRet<PJWPlugin | PJWType>
 > = UnionToIntersection<GetPluginFuncArrConsts<PluginFuncArr>> & {
   encoders: UnionToIntersection<GetPluginFuncArrEncoders<PluginFuncArr>>;
   decoders: UnionToIntersection<GetPluginFuncArrDecoders<PluginFuncArr>>;

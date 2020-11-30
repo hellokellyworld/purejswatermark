@@ -1,8 +1,8 @@
-import jpeg from '@jimp/jpeg';
-import png from '@jimp/png';
-import bmp from '@jimp/bmp';
-import tiff from '@jimp/tiff';
-import gif from '@jimp/gif';
+import jpeg from '@PJW/jpeg';
+import png from '@PJW/png';
+import bmp from '@PJW/bmp';
+import tiff from '@PJW/tiff';
+import gif from '@PJW/gif';
 
 type JpegRet = ReturnType<typeof jpeg>
 type PngRet = ReturnType<typeof png>
@@ -12,7 +12,7 @@ type GifRet = ReturnType<typeof gif>
 
 /**
  * This is made union and not intersection to avoid issues with
- * `IllformedPlugin` and `WellFormedPlugin` when using typings with Jimp
+ * `IllformedPlugin` and `WellFormedPlugin` when using typings with PJW
  * generic
  *
  * In reality, this should be an intersection but our type data isn't

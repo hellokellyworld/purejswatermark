@@ -27,17 +27,17 @@ export interface WellFormedPlugin<ImageType extends Image = Image> {
     [MIME_SPECIAL: string]: boolean;
   };
   constants?: {
-    // Contants to assign to the Jimp instance
+    // Contants to assign to the PJW instance
     [MIME_SPECIAL: string]: any;
   };
   decoders?: {
     [MIME_TYPE: string]: DecoderFn;
   };
   encoders?: {
-    // Jimp Image
+    // PJW Image
     [MIME_TYPE: string]: EncoderFn<ImageType>;
   };
-  // Extend the Jimp class with the following constants, etc
+  // Extend the PJW class with the following constants, etc
   class?: any;
 }
 
@@ -47,11 +47,11 @@ type ClassOrConstantPlugin<T extends Image> = WellFormedPlugin<T> &
     | Required<Pick<WellFormedPlugin<T>, 'constants'>>
   );
 
-// A Jimp type requires mime, but not class
-export type JimpType<T extends Image = Image> = WellFormedPlugin<T> &
+// A PJW type requires mime, but not class
+export type PJWType<T extends Image = Image> = WellFormedPlugin<T> &
   Required<Pick<WellFormedPlugin<T>, 'mime'>>;
 
-// Jimp plugin either MUST have class OR constant or be illformed
-export type JimpPlugin<T extends Image = Image> =
+// PJW plugin either MUST have class OR constant or be illformed
+export type PJWPlugin<T extends Image = Image> =
   | ClassOrConstantPlugin<T>
   | IllformedPlugin;

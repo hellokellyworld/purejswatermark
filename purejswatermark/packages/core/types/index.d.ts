@@ -2,8 +2,8 @@ export * from './etc';
 export * from './functions';
 export * from './plugins';
 export * from './utils';
-import {Jimp, JimpConstructors} from './jimp';
+import {PJW, PJWConstructors} from './PJW';
 
-export { Jimp, JimpConstructors };
-declare const defaultExp: Jimp;
+export { PJW, PJWConstructors };
+declare const defaultExp: PJW;
 export default defaultExp;

@@ -1,4 +1,4 @@
-import {Jimp} from './jimp';
+import {PJW} from './PJW';
 
 export interface Image {
   bitmap: Bitmap;
@@ -16,13 +16,13 @@ export type GenericCallback<T, U = any, TThis = any> = (
 ) => U;
 
 /**
- * `jimp` must be defined otherwise `this` will not apply properly
+ * `PJW` must be defined otherwise `this` will not apply properly
  * for custom configurations where plugins and types are needed
  */
-export type ImageCallback<jimp = Jimp> = (
-  this: jimp,
+export type ImageCallback<PJW = PJW> = (
+  this: PJW,
   err: Error | null,
-  value: jimp,
+  value: PJW,
   coords: {
     x: number;
     y: number;

@@ -1,7 +1,7 @@
 {
 	"name": "purejswatermarkapp-ts",
 	"version": "1.0.0",
-	"description": "test jimp",
+	"description": "test PJW",
 	"main": "./src/index.js",
 	"engines": {
 		"node": "8.11.4",

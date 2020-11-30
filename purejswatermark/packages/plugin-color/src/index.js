@@ -1,5 +1,5 @@
 import tinyColor from 'tinycolor2';
-import { throwError, isNodePattern } from "../../utils/src/index.js"//'@jimp/utils';
+import { throwError, isNodePattern } from "../../utils/src/index.js"//'@PJW/utils';
 
 // function applyKernel(im, kernel, x, y) {
 //   const value = [0, 0, 0];
@@ -130,8 +130,8 @@ export default () => ({
   // /**
   //  * Adjusts the brightness of the image
   //  * @param {number} val the amount to adjust the brightness, a number between -1 and +1
-  //  * @param {function(Error, Jimp)} cb (optional) a callback for when complete
-  //  * @returns {Jimp }this for chaining of methods
+  //  * @param {function(Error, PJW)} cb (optional) a callback for when complete
+  //  * @returns {PJW }this for chaining of methods
   //  */
   // brightness(val, cb) {
   //   if (typeof val !== 'number') {
@@ -175,8 +175,8 @@ export default () => ({
   // /**
   //  * Adjusts the contrast of the image
   //  * @param {number} val the amount to adjust the contrast, a number between -1 and +1
-  //  * @param {function(Error, Jimp)} cb (optional) a callback for when complete
-  //  * @returns {Jimp }this for chaining of methods
+  //  * @param {function(Error, PJW)} cb (optional) a callback for when complete
+  //  * @returns {PJW }this for chaining of methods
   //  */
   // contrast(val, cb) {
   //   if (typeof val !== 'number') {
@@ -219,8 +219,8 @@ export default () => ({
   // /**
   //  * Apply a posterize effect
   //  * @param {number} n the amount to adjust the contrast, minimum threshold is two
-  //  * @param {function(Error, Jimp)} cb (optional) a callback for when complete
-  //  * @returns {Jimp }this for chaining of methods
+  //  * @param {function(Error, PJW)} cb (optional) a callback for when complete
+  //  * @returns {PJW }this for chaining of methods
   //  */
   // posterize(n, cb) {
   //   if (typeof n !== 'number') {
@@ -255,8 +255,8 @@ export default () => ({
 
   // /**
   //  * Removes colour from the image using ITU Rec 709 luminance values
-  //  * @param {function(Error, Jimp)} cb (optional) a callback for when complete
-  //  * @returns {Jimp }this for chaining of methods
+  //  * @param {function(Error, PJW)} cb (optional) a callback for when complete
+  //  * @returns {PJW }this for chaining of methods
   //  */
   // greyscale,
 
@@ -266,8 +266,8 @@ export default () => ({
   /**
    * Multiplies the opacity of each pixel by a factor between 0 and 1
    * @param {number} f A number, the factor by which to multiply the opacity of each pixel
-   * @param {function(Error, Jimp)} cb (optional) a callback for when complete
-   * @returns {Jimp }this for chaining of methods
+   * @param {function(Error, PJW)} cb (optional) a callback for when complete
+   * @returns {PJW }this for chaining of methods
    */
   opacity(f, cb) {
     if (typeof f !== 'number')
@@ -293,8 +293,8 @@ export default () => ({
 
   // /**
   //  * Applies a sepia tone to the image
-  //  * @param {function(Error, Jimp)} cb (optional) a callback for when complete
-  //  * @returns {Jimp }this for chaining of methods
+  //  * @param {function(Error, PJW)} cb (optional) a callback for when complete
+  //  * @returns {PJW }this for chaining of methods
   //  */
   // sepia(cb) {
   //   this.scanQuiet(0, 0, this.bitmap.width, this.bitmap.height, function(
@@ -325,8 +325,8 @@ export default () => ({
   // /**
   //  * Fades each pixel by a factor between 0 and 1
   //  * @param {number} f A number from 0 to 1. 0 will haven no effect. 1 will turn the image completely transparent.
-  //  * @param {function(Error, Jimp)} cb (optional) a callback for when complete
-  //  * @returns {Jimp }this for chaining of methods
+  //  * @param {function(Error, PJW)} cb (optional) a callback for when complete
+  //  * @returns {PJW }this for chaining of methods
   //  */
   // fade(f, cb) {
   //   if (typeof f !== 'number') {
@@ -351,8 +351,8 @@ export default () => ({
   //  * Adds each element of the image to its local neighbors, weighted by the kernel
   //  * @param {array} kernel a matrix to weight the neighbors sum
   //  * @param {string} edgeHandling (optional) define how to sum pixels from outside the border
-  //  * @param {function(Error, Jimp)} cb (optional) a callback for when complete
-  //  * @returns {Jimp }this for chaining of methods
+  //  * @param {function(Error, PJW)} cb (optional) a callback for when complete
+  //  * @returns {PJW }this for chaining of methods
   //  */
   // convolution(kernel, edgeHandling, cb) {
   //   if (typeof edgeHandling === 'function' && typeof cb === 'undefined') {
@@ -455,8 +455,8 @@ export default () => ({
 
   // /**
   //  * Set the alpha channel on every pixel to fully opaque
-  //  * @param {function(Error, Jimp)} cb (optional) a callback for when complete
-  //  * @returns {Jimp }this for chaining of methods
+  //  * @param {function(Error, PJW)} cb (optional) a callback for when complete
+  //  * @returns {PJW }this for chaining of methods
   //  */
   // opaque(cb) {
   //   this.scanQuiet(0, 0, this.bitmap.width, this.bitmap.height, function(
@@ -481,8 +481,8 @@ export default () => ({
   //  * @param {number} y (optional) the y position of the region to pixelate
   //  * @param {number} w (optional) the width of the region to pixelate
   //  * @param {number} h (optional) the height of the region to pixelate
-  //  * @param {function(Error, Jimp)} cb (optional) a callback for when complete
-  //  * @returns {Jimp }this for chaining of methods
+  //  * @param {function(Error, PJW)} cb (optional) a callback for when complete
+  //  * @returns {PJW }this for chaining of methods
   //  */
   // pixelate(size, x, y, w, h, cb) {
   //   if (typeof x === 'function') {
@@ -551,8 +551,8 @@ export default () => ({
   //  * @param {number} y (optional) the y position of the region to apply convolution to
   //  * @param {number} w (optional) the width of the region to apply convolution to
   //  * @param {number} h (optional) the height of the region to apply convolution to
-  //  * @param {function(Error, Jimp)} cb (optional) a callback for when complete
-  //  * @returns {Jimp }this for chaining of methods
+  //  * @param {function(Error, PJW)} cb (optional) a callback for when complete
+  //  * @returns {PJW }this for chaining of methods
   //  */
   // convolute(kernel, x, y, w, h, cb) {
   //   if (!Array.isArray(kernel))
@@ -609,8 +609,8 @@ export default () => ({
   /**
    * Apply multiple color modification rules
    * @param {array} actions list of color modification rules, in following format: { apply: '<rule-name>', params: [ <rule-parameters> ]  }
-   * @param {function(Error, Jimp)} cb (optional) a callback for when complete
-   * @returns {Jimp }this for chaining of methods
+   * @param {function(Error, PJW)} cb (optional) a callback for when complete
+   * @returns {PJW }this for chaining of methods
    */
   color: colorFn,
   colour: colorFn

@@ -1,4 +1,4 @@
-import { ImageCallback } from '@jimp/core';
+import { ImageCallback } from '@PJW/core';
 
 interface ResizeClass {
   resize(w: number, h: number, cb?: ImageCallback<this>): this;

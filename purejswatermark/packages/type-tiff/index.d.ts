@@ -1,4 +1,4 @@
-import { DecoderFn, EncoderFn } from '@jimp/core';
+import { DecoderFn, EncoderFn } from '@PJW/core';
 
 interface Tiff {
   mime: { 'image/tiff': string[] }

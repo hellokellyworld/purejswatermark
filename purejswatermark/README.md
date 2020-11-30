@@ -1,23 +1,23 @@
 <div align="center">
   <img width="200" height="200"
     src="https://s3.amazonaws.com/pix.iemoji.com/images/emoji/apple/ios-11/256/crayon.png">
-  <h1>Jimp</h1>
+  <h1>PJW</h1>
   <p>JavaScript Image Manipulation Program</p>
 </div>
 
 An image processing library for Node written entirely in JavaScript, with zero native dependencies.
 
-Installation: `npm install --save jimp`
+Installation: `npm install --save PJW`
 
-API documentation can be found in the main [jimp package](./packages/jimp)
+API documentation can be found in the main [PJW package](./packages/PJW)
 
 > ## Notice of potentially breaking change
 >
-> As of v0.10.4, core-js is no longer included with jimp or its extensions. If you rely on core-js, install it with either `yarn add core-js` or `npm i core-js`
+> As of v0.10.4, core-js is no longer included with PJW or its extensions. If you rely on core-js, install it with either `yarn add core-js` or `npm i core-js`
 
 ## Tools
 
-:hammer: [cli](./packages/cli) - Jimp as a CLI program. Can load and run all plugins
+:hammer: [cli](./packages/cli) - PJW as a CLI program. Can load and run all plugins
 
 ## Supported Image Types
 
@@ -55,9 +55,9 @@ API documentation can be found in the main [jimp package](./packages/jimp)
 
 :rocket: If you want to add your plugins to this list make a PR! :rocket:
 
-## Custom Jimp
+## Custom PJW
 
-If you want to extend jimp or omit types or functions visit [@jimp/custom](./packages/custom).
+If you want to extend PJW or omit types or functions visit [@PJW/custom](./packages/custom).
 
 - Add file-types or switch encoder/decoders
 - Add add/remove plugins (image manipulation methods)
@@ -70,9 +70,9 @@ Please read the [CONTRIBUTING documentation](CONTRIBUTING.md).
 
 ## License
 
-Jimp is licensed under the MIT license. Open Sans is licensed under the Apache license
+PJW is licensed under the MIT license. Open Sans is licensed under the Apache license
 
-## Project Using Jimp
+## Project Using PJW
 
 :star: [nimp](https://nimp.app/) - Node based image manipulator. Procedurally create and edit images.
 
@@ -96,7 +96,7 @@ Jimp is licensed under the MIT license. Open Sans is licensed under the Apache l
 
 :star: [differencify](https://www.npmjs.com/package/differencify) - Perceptual diffing tool
 
-:star: [gifwrap](https://www.npmjs.com/package/gifwrap) - A Jimp-compatible library for working with GIFs
+:star: [gifwrap](https://www.npmjs.com/package/gifwrap) - A PJW-compatible library for working with GIFs
 
 :star: [replace-color](https://www.npmjs.com/package/replace-color) - Replace color with another one pixel by pixel
 

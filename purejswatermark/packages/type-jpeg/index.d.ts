@@ -1,4 +1,4 @@
-import { DecoderFn, EncoderFn, ImageCallback } from '@jimp/core';
+import { DecoderFn, EncoderFn, ImageCallback } from '@PJW/core';
 
 interface JpegClass {
   _quality: number;

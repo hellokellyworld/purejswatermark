@@ -1,4 +1,4 @@
-import { throwError, isNodePattern } from "../../utils/src/index.js"//'@jimp/utils';
+import { throwError, isNodePattern } from "../../utils/src/index.js"//'@PJW/utils';
 
 import Resize from './modules/resize';
 import Resize2 from './modules/resize2';
@@ -15,11 +15,11 @@ export default () => ({
   class: {
     /**
      * Resizes the image to a set width and height using a 2-pass bilinear algorithm
-     * @param {number} w the width to resize the image to (or Jimp.AUTO)
-     * @param {number} h the height to resize the image to (or Jimp.AUTO)
-     * @param {string} mode (optional) a scaling method (e.g. Jimp.RESIZE_BEZIER)
-     * @param {function(Error, Jimp)} cb (optional) a callback for when complete
-     * @returns {Jimp} this for chaining of methods
+     * @param {number} w the width to resize the image to (or PJW.AUTO)
+     * @param {number} h the height to resize the image to (or PJW.AUTO)
+     * @param {string} mode (optional) a scaling method (e.g. PJW.RESIZE_BEZIER)
+     * @param {function(Error, PJW)} cb (optional) a callback for when complete
+     * @returns {PJW} this for chaining of methods
      */
     resize(w, h, mode, cb) {
       if (typeof w !== 'number' || typeof h !== 'number') {

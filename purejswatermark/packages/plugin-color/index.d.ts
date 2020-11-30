@@ -1,4 +1,4 @@
-import { ImageCallback } from '@jimp/core';
+import { ImageCallback } from '@PJW/core';
 
 type ColorActionName =
   | 'mix'
